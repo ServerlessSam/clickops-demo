@@ -1,0 +1,150 @@
+---
+Metadata:
+  TemplateId: "arn:aws:cloudformation:eu-west-2:724772056462:generatedTemplate/8445f8eb-9b94-41a7-9bd2-9fc10e6bb55f"
+Parameters:
+  LambdaFunction00MyLambdaFunction1325700kVilcCodeS3Keydw9i0:
+    NoEcho: "true"
+    Type: "String"
+    Description: "The Amazon S3 key of the deployment package."
+  LambdaFunction00MyLambdaFunction1325700kVilcCodeS3BucketFOeva:
+    NoEcho: "true"
+    Type: "String"
+    Description: "An Amazon S3 bucket in the same AWS-Region as your function. The\
+      \ bucket can be in a different AWS-account."
+Resources:
+  S3Bucket00myuniquebucketname1325700EybYp:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: "Retain"
+    Properties:
+      PublicAccessBlockConfiguration:
+        RestrictPublicBuckets: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        BlockPublicAcls: true
+      BucketName: "my-unique-bucket-name-13257"
+      OwnershipControls:
+        Rules:
+        - ObjectOwnership: "BucketOwnerEnforced"
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+        - BucketKeyEnabled: false
+          ServerSideEncryptionByDefault:
+            SSEAlgorithm: "AES256"
+  ApiGatewayRestApi00ma1fkrumwe00qPg6p:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::ApiGateway::RestApi"
+    DeletionPolicy: "Retain"
+    Properties:
+      ApiKeySourceType: "HEADER"
+      EndpointConfiguration:
+        Types:
+        - "EDGE"
+      DisableExecuteApiEndpoint: false
+      Name: "MyAPI-13257"
+  ApiGatewayStage00prod00Y2cUQ:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::ApiGateway::Stage"
+    DeletionPolicy: "Retain"
+    Properties:
+      RestApiId:
+        Ref: "ApiGatewayRestApi00ma1fkrumwe00qPg6p"
+      DeploymentId:
+        Fn::GetAtt:
+        - "ApiGatewayDeployment008olkcn00UHlcc"
+        - "DeploymentId"
+      StageName: "prod"
+      TracingEnabled: false
+      CacheClusterEnabled: false
+  LambdaPermission00functionMyLambdaFunction1325700B9a7e:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Lambda::Permission"
+    DeletionPolicy: "Retain"
+    Properties:
+      FunctionName:
+        Fn::GetAtt:
+        - "LambdaFunction00MyLambdaFunction1325700kVilc"
+        - "Arn"
+      Action: "lambda:InvokeFunction"
+      SourceArn: "arn:aws:execute-api:eu-west-2:724772056462:ma1fkrumwe/*/*/*"
+      Principal: "apigateway.amazonaws.com"
+  ApiGatewayDeployment008olkcn00UHlcc:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::ApiGateway::Deployment"
+    DeletionPolicy: "Retain"
+    Properties:
+      RestApiId:
+        Ref: "ApiGatewayRestApi00ma1fkrumwe00qPg6p"
+  DynamoDBTable00MyDynamoDBTable1325700QHjLe:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::DynamoDB::Table"
+    DeletionPolicy: "Retain"
+    Properties:
+      SSESpecification:
+        SSEEnabled: false
+      TableName: "MyDynamoDBTable-13257"
+      AttributeDefinitions:
+      - AttributeType: "S"
+        AttributeName: "ID"
+      ContributorInsightsSpecification:
+        Enabled: false
+      BillingMode: "PAY_PER_REQUEST"
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: false
+      KeySchema:
+      - KeyType: "HASH"
+        AttributeName: "ID"
+      DeletionProtectionEnabled: false
+      Tags: []
+      TimeToLiveSpecification:
+        Enabled: false
+  LambdaFunction00MyLambdaFunction1325700kVilc:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::Lambda::Function"
+    DeletionPolicy: "Retain"
+    Properties:
+      MemorySize: 128
+      Description: ""
+      TracingConfig:
+        Mode: "PassThrough"
+      Timeout: 5
+      RuntimeManagementConfig:
+        UpdateRuntimeOn: "Auto"
+      Handler: "lambda_function.lambda_handler"
+      Code:
+        S3Bucket:
+          Ref: "LambdaFunction00MyLambdaFunction1325700kVilcCodeS3BucketFOeva"
+        S3Key:
+          Ref: "LambdaFunction00MyLambdaFunction1325700kVilcCodeS3Keydw9i0"
+      Role:
+        Fn::GetAtt:
+        - "IAMRole00LambdaExecutionRole1325700rRObU"
+        - "Arn"
+      FileSystemConfigs: []
+      FunctionName: "MyLambdaFunction-13257"
+      Runtime: "python3.8"
+      PackageType: "Zip"
+      LoggingConfig:
+        LogFormat: "Text"
+        LogGroup: "/aws/lambda/MyLambdaFunction-13257"
+      EphemeralStorage:
+        Size: 512
+      Architectures:
+      - "x86_64"
+  IAMRole00LambdaExecutionRole1325700rRObU:
+    UpdateReplacePolicy: "Retain"
+    Type: "AWS::IAM::Role"
+    DeletionPolicy: "Retain"
+    Properties:
+      Path: "/"
+      ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+      MaxSessionDuration: 3600
+      RoleName: "LambdaExecutionRole-13257"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action: "sts:AssumeRole"
+          Effect: "Allow"
+          Principal:
+            Service: "lambda.amazonaws.com"
