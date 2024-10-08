@@ -32,4 +32,17 @@ During the workshop we are going to do the following:
 - Generate a CloudFormation template for all the serverless components created via the script.
 - Migrate this template to a CDK app via the `cdk migrate` command.
 - Migrate the template to a CDK app using the CDK CloudFormation construct.
-+ Migrate this template to a Terraform project.
+- Add new resources to this CDK app.
+- Migrate this template to a Terraform project.
+
+
+## After the Workshop
+
+It is important to cleanup after this workshop. I have provided a `teardown.sh` script (genAI generated) which could help in cleaning up all the resources. However we will have moved them all around into new CloudFormation templates etc. I'd recommend deleting the whole AWS account. If that is not possible, then ensure you delete the following by hand:
+- 1x t3.micro EC2 instance
+- 1x db.t3.micro RDS instance
+- 1x API gateway
+- 1x S3 bucket
+- All CloudFormation templates visable in the console.
+
+If you are having any trouble cleaning up please reach out to me on Slack! (Samuel Lock)
