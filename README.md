@@ -32,8 +32,8 @@ This script mimics the click-ops nature of some AWS accounts. The resources are 
 ## During the Workshop
 
 During the workshop we are going to do the following:
-- Generate a CloudFormation template for the EC2, RDS and networking resources, using auto-discovery to locate all networking pieces.
-- Generate a CloudFormation template for all the serverless components created via the script.
+- Generate a CloudFormation template (via the "IAC Generator" feature) for the EC2, RDS and networking resources, using auto-discovery to locate all networking pieces.
+- Generate a CloudFormation template (via the "IAC Generator" feature) for all the serverless components created via the script.
 - Migrate this template to a CDK app via the `cdk migrate` command.
 - Migrate the template to a CDK app using the CDK CloudFormation construct.
 - Add new resources to this CDK app.
@@ -47,6 +47,6 @@ It is important to cleanup after this workshop. I have provided a `teardown.sh` 
 - 1x db.t3.micro RDS instance
 - 1x API gateway
 - 1x S3 bucket
-- All CloudFormation templates visable in the console.
+- All CloudFormation templates visible in the console.
 
 If you are having any trouble cleaning up please reach out to me on Slack! (Samuel Lock)
