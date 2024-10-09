@@ -43,7 +43,7 @@ During the workshop we are going to do the following:
 
 ## After the Workshop
 
-It is important to cleanup after this workshop. I have provided a `teardown.sh` script (genAI generated) which could help in cleaning up all the resources. However we will have moved them all around into new CloudFormation templates etc. I'd recommend deleting the whole AWS account. If that is not possible, then ensure you delete the following by hand:
+It is important to cleanup after this workshop. I have provided a `teardown.sh` script (genAI generated) which could help in cleaning up all the resources. However we will have moved them all around into new CloudFormation templates etc. I'd recommend deleting the whole AWS account. If that is not possible, then ensure you delete the following by hand (these can incur cost if you are not careful):
 - 1x t3.micro EC2 instance
 - 1x db.t3.micro RDS instance
 - 1x API gateway
