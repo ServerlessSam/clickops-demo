@@ -26,6 +26,7 @@ I strongly recommend using a throwaway AWS account for this workshop. It is like
 
     So this shouldn't cost you anything, but be aware that running the script multiple times will duplicate the resources and incur cost. I'd recommend using a **throwaway AWS environment** for this workshop.
 6) Verify the listed resources above were deployed in your account via the AWS console. Check the terminal output for any errors.
+7) Ensure the AWS CDK is installed to your machine and that you have run `cdk bootstrap` to bootstrap the AWS account with what the CDK needs.
 
 This script mimics the click-ops nature of some AWS accounts. The resources are all orphaned without an infrastructure-as-code template defining them. We are going to change that!
 
